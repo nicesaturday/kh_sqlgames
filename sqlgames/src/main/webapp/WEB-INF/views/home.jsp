@@ -9,6 +9,7 @@
 <%@ include file="/header.jsp" %>
 <div id="main_content">
 content
+test merge
 </div>
 <%@ include file="/footer.jsp" %>
 </body>
