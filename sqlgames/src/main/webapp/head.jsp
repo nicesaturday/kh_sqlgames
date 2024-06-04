@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="hpath" value="<%= request.getContextPath() %>"/>
-<link rel="stylesheet" href="${hpath }/resources/css/common.css?after3"/>
+<link rel="stylesheet" href="${hpath }/resources/css/common.css?after4"/>
 <link rel="stylesheet" href="${hpath }/resources/css/header.css?after3"/>
 <script src="${hpath }/js/jquery-3.2.1.min.js"></script>
 <meta property="og:url" content="">
