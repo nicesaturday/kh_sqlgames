@@ -13,8 +13,7 @@
 		select count(*) from member
 	</select>
 	<insert id="insMember">
-		insert into member values (#{id}, #{pw}, #{name}, #{email}, #{tel}, 
-		#{addr1}, #{addr2}, #{postcode}, #{birth}, default, default, #{tag1}, #{tag2}, #{tag3})
+		insert into member values (#{id}, #{pw}, #{name}, #{email}, #{tel}, #{addr1}, #{addr2}, #{postcode}, #{birth}, default, default, #{tag1}, #{tag2}, #{tag3})
 	</insert>
 	<update id="changeInfo">
 		update member set pw=#{pw}, name=#{name}, email=#{email}, tel=#{tel}, 

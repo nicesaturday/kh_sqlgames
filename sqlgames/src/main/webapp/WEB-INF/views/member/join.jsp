@@ -16,21 +16,22 @@
 	<div class="background-wrap">
         <div class="background"></div>
     </div>
-    <form action="${path2 }/member/joinPro.do" method="post" onsubmit="return joinCheck(this)">
+    <form name="frm1" id="frm1" action="${path2 }/member/joinPro.do" method="post">
         <h1>SQL GAMES</h1>
         <div class="inset">
             <p>
-                <label class="label" for="user-id">아이디</label>
-                <input type="text" id="user-id" name="user-id">
+                <label class="label" for="id">아이디</label>
+                <input type="text" id="id" name="id">
                 <button type="button" onclick="checkId()">중복검사</button>
+                <input type="hidden" name="idck" id="idck" value="no"/>
             </p>
             <p>
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password">
+                <label for="pw">비밀번호</label>
+                <input type="password" id="pw" name="pw">
             </p>
             <p>
-                <label for="password">비밀번호 확인</label>
-                <input type="password" id="password" name="password">
+                <label for="pw">비밀번호 확인</label>
+                <input type="password" id="pw2" name="pw2">
             </p>
             <p>
                 <label for="name">이름</label>
@@ -41,25 +42,25 @@
                 <input type="text" id="email" name="email">
             </p>
             <p>
-                <label for="phone">연락처</label>
-                <input type="text" id="phone" name="phone">
+                <label for="tel">연락처</label>
+                <input type="text" id="tel" name="tel">
             </p>
             <p>
-                <label for="zipcode">우편번호</label>
-                <input type="text" id="zipcode" name="zipcode">
-                <button type="button" onclick="searchZipcode()">주소 검색</button>
+                <label for="postcode">우편번호</label>
+                <input type="text" id="postcode" name="postcode">
+                <button type="button" onclick="searchpostcode()">주소 검색</button>
             </p>
             <p>
-                <label for="address">주소</label>
-                <input type="text" id="address" name="address">
+                <label for="addr1">주소</label>
+                <input type="text" id="addr1" name="addr1">
             </p>
             <p>
-                <label for="detail-address">상세주소</label>
-                <input type="text" id="detail-address" name="detail-address">
+                <label for="addr2">상세주소</label>
+                <input type="text" id="addr2" name="addr2">
             </p>
             <p>
-                <label for="birthdate">생년월일</label>
-                <input type="date" id="birthdate" name="birthdate">
+                <label for="birth">생년월일</label>
+                <input type="date" id="birth" name="birth">
             </p>
             <p style="font-size: 15px; font-weight: 600;">관심 게임 장르</p>
             <p>
@@ -73,31 +74,35 @@
                 <label><input type="checkbox" name="genre" value="Puzzle"> Puzzle</label>
                 <label><input type="checkbox" name="genre" value="Simulation"> Simulation</label>
                 <label><input type="checkbox" name="genre" value="Strategy"> Strategy</label>
+                
+                <input type="hidden" id="tag1" name="tag1">
+			    <input type="hidden" id="tag2" name="tag2">
+			    <input type="hidden" id="tag3" name="tag3">
             </p>
         </div>
         <p class="p-container">
-            <input type="submit" value="JOIN">
+            <input type="submit" value="JOIN" onclick="setGenreTags()">
         </p>
     </form>
     <script>
         function checkId() {
-        	if($("#user-id").val()==""){
+        	if($("#id").val()==""){
                 alert("아이디를 입력 해주세요.");
-                $("#user-id").focus();
+                $("#id").focus();
                 return;
         	}
-        	var params = { id : $("#user-id").val() }
+        	var params = { id : $("#id").val() }
         	$.ajax({
-        		url: "${path2 }/member/idCheck.do?id="+$("#user-id").val(),
-    			type: "post",
+        		url: "${path2 }/member/idCheck.do?id="+$("#id").val(),
+    			type: "get",
     			dataType: "json",
-    			data : "params",
+    			//data : "params",
     			success:function(result){
     				console.log(result.data);
                     var idChk = result.data;	//true 또는 false를 받음
-                    if(idChk == false){	//사용할 수 없는 아이디
+                    if(!idChk){	//사용할 수 없는 아이디
                         $("#idck").val("no");
-                        $("#msg").html("<strong style='color:red'>기존에 사용되고 있는 아이디 입니다. 다시 입력하시기 바랍니다.</strong>");
+                        $("#msg").html("<strong style='color:red'>이미 사용중인 아이디가 있습니다.</strong>");
                         $("#id").focus();
                     } else if(idChk){	//사용 가능한 아이디
                         $("#idck").val("yes");
@@ -109,9 +114,25 @@
         	});
         }
         
-        function searchZipcode() {
+        function searchpostcode() {
             // 우편번호 검색 로직
             alert("우편번호 검색 기능은 구현되지 않았습니다.");
+        }
+        
+        function getSelectTgas() {
+            var selectTgas = [];
+            var checkboxes = document.querySelectorAll('input[name="genre"]:checked');
+            checkboxes.forEach(function(checkbox) {
+            	selectTgas.push(checkbox.value);
+            });
+            return selectTgas;
+        }
+        
+        function setGenreTags() {
+            var selectTgas = getSelectTgas();
+            document.getElementById('tag1').value = selectTgas[0] || ''; // 첫 번째 장르를 설정
+            document.getElementById('tag2').value = selectTgas[1] || ''; // 두 번째 장르를 설정
+            document.getElementById('tag3').value = selectTgas[2] || ''; // 세 번째 장르를 설정
         }
     </script>
 </body>

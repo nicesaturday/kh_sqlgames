@@ -4,6 +4,7 @@ package com.sqlgames.ctrl;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
@@ -40,7 +41,7 @@ public class MemberController {
 		return "member/join";
 	}
 	
-	@PostMapping("idCheck.do")
+	@GetMapping("idCheck.do")
 	public void idCheck(@RequestParam("id") String id, HttpServletResponse response, Model model) throws IllegalArgumentException, IOException {
 		
 		Member cus = memberService.getMember(id);
@@ -57,6 +58,26 @@ public class MemberController {
 		json.put("data", result);
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
+	}
+	
+	@PostMapping("joinPro.do")
+	public String joinPro(HttpServletRequest request, Model model, RedirectAttributes rttr) {
+		Member member = new Member();
+		member.setId(request.getParameter("id"));
+		member.setPw(request.getParameter("pw"));	//비밀번호 암호화
+		member.setName(request.getParameter("name"));
+		member.setEmail(request.getParameter("email"));
+		member.setTel(request.getParameter("tel"));
+		member.setAddr1(request.getParameter("addr1"));
+		member.setAddr2(request.getParameter("addr2"));
+		member.setPostcode(request.getParameter("postcode"));
+		member.setBirth(request.getParameter("birth"));
+		member.setTag1(request.getParameter("tag1"));
+		member.setTag2(request.getParameter("tag2"));
+		member.setTag3(request.getParameter("tag3"));
+		memberService.insMember(member);
+		model.addAttribute("msg", "회원가입을 축하합니다.");
+		return "redirect:/";
 	}
 	
 	@GetMapping("login.do")
