@@ -1,9 +1,8 @@
 @charset "UTF-8";
-#header {
+#main_header {
 	width: 100%;
 	height: 100px;
-	position: fixed;
-	background-color: #F1F1F1;
+	background-color: orange;
 	display: flex;
 	justify-content: space-between;
 }
