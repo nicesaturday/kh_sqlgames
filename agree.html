@@ -1,16 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path2" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>Agree</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
         body {background-color: #1b1b1b;}
         .agreebox {background-color: #111;
             width: 40%;
@@ -43,18 +37,16 @@
             display: flex;
         }
         h4 {margin: 0;}
-        
         #in_btn1 {cursor: pointer;
             font-weight: 600;
             background-color: rgb(197, 195, 192);
             box-shadow: 0 0 10px gray;
         }
-        
         #in_btn1:hover {background-color: rgb(177, 176, 174);}
     </style>
 </head>
 <body>
-	<section class="agreebox">
+    <section class="agreebox">
         <div class="terms-container">
             <h2>회원약관</h2>
             <div class="terms-content">
@@ -957,22 +949,5 @@
             </div>
         </div>
     </section>
-    <script>
-        var ck_item1 = document.getElementById("ck_item1");
-        var ck_item2 = document.getElementById("ck_item2");
-        var in_btn1 = document.getElementById("in_btn1");
-        in_btn1.addEventListener("click", function(){
-            if(ck_item1.checked && ck_item2.checked){
-                location.href = "${path2}/member/join.do";
-            } else {
-                alert("약관 및 개인정보처리 방침에 동의하지 않으셨습니다.");
-                return;
-            }
-        });
-        function protocol(){
-            ck_item1.checked = true;
-            ck_item2.checked = true;
-        }
-    </script>
 </body>
 </html>

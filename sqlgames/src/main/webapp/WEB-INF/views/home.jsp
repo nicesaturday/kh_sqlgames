@@ -16,7 +16,7 @@ content
 <a href="${path2}/member/login.do" class="button is-light">
     Log in
 </a>
-<a href="${path2}/member/join.do" class="button is-primary">
+<a href="${path2}/member/term.do" class="button is-primary">
     <strong>Sign up</strong>
 </a>
 </div>

@@ -212,3 +212,5 @@ button {cursor: pointer;
 }
 
 button:hover {background: rgb(201, 149, 8);}
+
+#id {margin-bottom:0px;}

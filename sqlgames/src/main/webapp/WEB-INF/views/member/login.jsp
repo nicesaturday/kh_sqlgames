@@ -56,14 +56,14 @@
         <div class="background"></div>
       </div>
       
-      <form id="accesspanel" action="login" method="post">
+      <form id="accesspanel" name="loginForm" action="${path2 }/member/loginPro.do" method="post">
         <h1 id="litheader">SQL GAMES</h1>
         <div class="inset">
           <p>
-            <input type="text" name="username" id="email" placeholder="ID를 입력 해주세요.">
+            <input type="text" name="id" id="id" placeholder="ID를 입력 해주세요.">
           </p>
           <p>
-            <input type="password" name="password" id="password" placeholder="PW를 입력 해주세요.">
+            <input type="password" name="pw" id="pw" placeholder="PW를 입력 해주세요.">
           </p>
         <div class="infofound">
             <p><a href="">ID 찾기 / PW 찾기</a></p>
@@ -74,5 +74,8 @@
           <input type="submit" name="Login" id="go" value="Login">
         </p>
       </form>
+      <c:if test="${not empty msg}">
+	    <script>alert('${msg}');</script>
+	  </c:if>
 </body>
 </html>

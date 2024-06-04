@@ -16,7 +16,7 @@
 	<div class="background-wrap">
         <div class="background"></div>
     </div>
-    <form name="frm1" id="frm1" action="${path2 }/member/joinPro.do" method="post">
+    <form name="frm1" id="frm1" action="${path2 }/member/joinPro.do" method="post" onsubmit="return joinCheck(this)">
         <h1>SQL GAMES</h1>
         <div class="inset">
             <p>
@@ -24,6 +24,9 @@
                 <input type="text" id="id" name="id">
                 <button type="button" onclick="checkId()">중복검사</button>
                 <input type="hidden" name="idck" id="idck" value="no"/>
+            	<c:if test="${empty qid }">
+                   <p id="msg" style="clear:both;padding:0.5rem;margin-left:100px" value=""></p>
+                </c:if>
             </p>
             <p>
                 <label for="pw">비밀번호</label>
@@ -100,13 +103,13 @@
     			success:function(result){
     				console.log(result.data);
                     var idChk = result.data;	//true 또는 false를 받음
-                    if(!idChk){	//사용할 수 없는 아이디
+                    if(idChk == false){	//사용할 수 없는 아이디
                         $("#idck").val("no");
                         $("#msg").html("<strong style='color:red'>이미 사용중인 아이디가 있습니다.</strong>");
                         $("#id").focus();
-                    } else if(idChk){	//사용 가능한 아이디
+                    } else if(idChk == true){	//사용 가능한 아이디
                         $("#idck").val("yes");
-                        $("#msg").html("<strong style='color:blue'>사용가능한 아이디 입니다.</strong>");
+                        $("#msg").html("<strong style='color:white'>사용가능한 아이디 입니다.</strong>");
                     } else if(idck==""){
                         $("#msg").html("<strong>아이디가 확인되지 않았습니다. 다시 시도해주시기 바랍니다.</strong>");
                     }
@@ -114,10 +117,36 @@
         	});
         }
         
-        function searchpostcode() {
-            // 우편번호 검색 로직
-            alert("우편번호 검색 기능은 구현되지 않았습니다.");
+        function joinCheck(f){
+            if(f.pw.value!=f.pw2.value){
+                alert("비밀번호와 비밀번호 확인이 서로 다릅니다.");
+                f.pw.focus();
+                return false;
+            }
+            if(f.idck.value!="yes"){
+                alert("아이디 중복 체크를 하지 않으셨습니다.");
+                return false;
+            }
         }
+        
+        function searchpostcode() {
+        	new daum.Postcode({
+                oncomplete: function(data) {
+                    console.log(data);
+                    var roadAddr = data.roadAddress;
+                    var jibunAddr = data.jibunAddress;
+                    document.getElementById("postcode").value = data.zonecode;
+                    if(roadAddr !== '') {
+                        document.getElementById("addr1").value = roadAddr;
+                    } else if(jibunAddr !== ''){
+                        document.getElementById("addr1").value = jibunAddr;
+                    }
+                    document.getElementById("addr2").focus();
+                }
+            }).open();
+        }
+    
+        
         
         function getSelectTgas() {
             var selectTgas = [];
@@ -135,5 +164,6 @@
             document.getElementById('tag3').value = selectTgas[2] || ''; // 세 번째 장르를 설정
         }
     </script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

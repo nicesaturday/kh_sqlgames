@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	
 	@GetMapping("term.do")
@@ -83,5 +87,28 @@ public class MemberController {
 	@GetMapping("login.do")
 	public String login(Model model) {
 		return "member/login";
+	}
+	
+	@PostMapping("loginPro.do")
+	public String loginPro(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model, RedirectAttributes rttr) {
+		session.invalidate();
+		Member cus = memberService.getMember(id);
+		
+		if (cus == null) {
+			rttr.addFlashAttribute("msg", "아이디가 존재하지 않습니다.");
+	        return "redirect:login.do";
+	    }
+		
+		boolean loginSuccess = pw.equals(cus.getPw());
+		if(loginSuccess) {
+			session.setAttribute("cus", cus);
+			session.setAttribute("sid", id);
+			session.setAttribute("sname", cus.getName());
+			//model.addAttribute("msg", "로그인 성공");
+			return "redirect:/";
+		} else {
+			rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+			return "redirect:login.do";	
+		}
 	}
 }
