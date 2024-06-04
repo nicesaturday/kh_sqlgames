@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 폼</title>
+    <link rel="stylesheet" href="join.css">
+</head>
+<body>
+    <div class="background-wrap">
+        <div class="background"></div>
+    </div>
+    <form>
+        <h1>SQL GAMES</h1>
+        <div class="inset">
+            <p>
+                <label class="label" for="user-id">아이디</label>
+                <input type="text" id="user-id" name="user-id">
+                <button type="button" onclick="checkId()">중복검사</button>
+            </p>
+            <p>
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password">
+            </p>
+            <p>
+                <label for="password">비밀번호 확인</label>
+                <input type="password" id="password" name="password">
+            </p>
+            <p>
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name">
+            </p>
+            <p>
+                <label for="email">이메일</label>
+                <input type="text" id="email" name="email">
+            </p>
+            <p>
+                <label for="phone">연락처</label>
+                <input type="text" id="phone" name="phone">
+            </p>
+            <p>
+                <label for="zipcode">우편번호</label>
+                <input type="text" id="zipcode" name="zipcode">
+                <button type="button" onclick="searchZipcode()">주소 검색</button>
+            </p>
+            <p>
+                <label for="address">주소</label>
+                <input type="text" id="address" name="address">
+            </p>
+            <p>
+                <label for="detail-address">상세주소</label>
+                <input type="text" id="detail-address" name="detail-address">
+            </p>
+            <p>
+                <label for="birthdate">생년월일</label>
+                <input type="date" id="birthdate" name="birthdate">
+            </p>
+            <p style="font-size: 15px; font-weight: 600;">관심 게임 장르</p>
+            <p>
+                <label><input type="checkbox" name="genre" value="RPG"> RPG</label>
+                <label><input type="checkbox" name="genre" value="FPS"> FPS</label>
+                <label><input type="checkbox" name="genre" value="MOBA"> MOBA</label>
+                <label><input type="checkbox" name="genre" value="RTS"> RTS</label>
+                <label><input type="checkbox" name="genre" value="Sports"> Sports</label><BR>
+                <label><input type="checkbox" name="genre" value="Action"> Action</label>
+                <label><input type="checkbox" name="genre" value="Adventure"> Adventure</label>
+                <label><input type="checkbox" name="genre" value="Puzzle"> Puzzle</label>
+                <label><input type="checkbox" name="genre" value="Simulation"> Simulation</label>
+                <label><input type="checkbox" name="genre" value="Strategy"> Strategy</label>
+            </p>
+        </div>
+        <p class="p-container">
+            <input type="submit" value="JOIN">
+        </p>
+    </form>
+    <script>
+        function checkId() {
+            // 아이디 중복검사 로직
+            alert("아이디 중복검사 기능은 구현되지 않았습니다.");
+        }
+
+        function searchZipcode() {
+            // 우편번호 검색 로직
+            alert("우편번호 검색 기능은 구현되지 않았습니다.");
+        }
+    </script>
+</body>
+</html>

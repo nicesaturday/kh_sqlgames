@@ -1,0 +1,38 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+
+
+a {
+	color: black;
+}
+
+ul , li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	color: black;
+}
+
+#main_content {
+	width: 100%; 
+  	height: auto;
+  	min-height: 100%;
+}
+
+
+#main_footer {
+	width: 100%;
+	height: 400px;
+	background-color: #0E0C0C;
+	position: relative;
+}
