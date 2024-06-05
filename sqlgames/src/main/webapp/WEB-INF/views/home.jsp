@@ -3,7 +3,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-<%@ include file="/head.jsp" %>
+<%@ include file="./include/head.jsp" %>
 	<title>Home</title>
 	<style>
 	  #section_serch {
@@ -49,7 +49,7 @@
 	</style>
 </head>
 <body>
-<%@ include file="/header.jsp" %>
+<%@ include file="./include/header.jsp" %>
 <div id="main_content">
   <div id="section_serch">
     <div id="section_serch_box">
@@ -76,6 +76,6 @@
     </div>
   </div>
 </div>
-<%@ include file="/footer.jsp" %>
+<%@ include file="./include/footer.jsp" %>
 </body>
 </html>
