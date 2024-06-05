@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private BCryptPasswordEncoder pwdEncoder;
 	
 	@Autowired
 	private HttpSession session;
@@ -68,7 +72,7 @@ public class MemberController {
 	public String joinPro(HttpServletRequest request, Model model, RedirectAttributes rttr) {
 		Member member = new Member();
 		member.setId(request.getParameter("id"));
-		member.setPw(request.getParameter("pw"));	//비밀번호 암호화
+		member.setPw(pwdEncoder.encode(request.getParameter("pw")));	//비밀번호 암호화
 		member.setName(request.getParameter("name"));
 		member.setEmail(request.getParameter("email"));
 		member.setTel(request.getParameter("tel"));
@@ -99,7 +103,7 @@ public class MemberController {
 	        return "redirect:login.do";
 	    }
 		
-		boolean loginSuccess = pw.equals(cus.getPw());
+		boolean loginSuccess = pwdEncoder.matches(pw, cus.getPw());
 		if(loginSuccess) {
 			session.setAttribute("cus", cus);
 			session.setAttribute("sid", id);
