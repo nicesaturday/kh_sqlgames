@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+	<select id="getReplyList" resultType="com.sqlgames.dto.Reply">
+		select * from reply order by rno desc
+	</select>	
+	<select id="getReply" parameterType="String" resultType="com.sqlgames.dto.Reply">
+		select * from reply where rno=#{rno}
+	</select>
+	<select id="replyCount" resultType="int">
+		select count(*) from reply
+	</select>
+	<insert id="insReply">
+		insert into reply values (#{id}, #{rno}, #{content}, #{resdate}, #{star})
+	</insert>
+	<update id="changeReply">
+		update reply set content=#{content}, star=#{star} where id=#{id}
+	</update>
+	<update id="changePoint">
+		update member set point=point+#{point} where id=#{id}
+	</update>
+	<delete id="delMember">
+		delete from member where id=#{id}
+	</delete>
+</mapper>
